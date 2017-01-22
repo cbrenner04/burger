@@ -6,7 +6,7 @@ var exphbs = require('express-handlebars');
 
 // set up server
 var app = express();
-var port = 3000;
+var port = process.env.PORT || 3000;
 app.listen(port);
 
 // set up handlebars engine
