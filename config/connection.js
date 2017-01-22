@@ -4,7 +4,7 @@ var mysql = require("mysql");
 // setup the connection
 var connection = mysql.createConnection({
     host: process.env.HOST || "localhost",
-    user: process.env.USER || "root",
+    user: process.env.USERNAME || "root",
     password: process.env.PASSWORD || "",
     database: process.env.DB || "burgers_db"
 });
@@ -12,6 +12,8 @@ var connection = mysql.createConnection({
 // connect to the database
 connection.connect(function(error) {
     if (error) {
+        console.log(connection.host);
+        console.log(connection.password);
         console.error("error connecting: " + error.stack);
         return;
     }
