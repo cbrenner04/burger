@@ -12,5 +12,10 @@ var dbConfig = {
 // DATABASE_URL env is set up for heroku
 var connection = mysql.createConnection(process.env.DATABASE_URL || dbConfig);
 
+// app is crashing on heroku due to idle timeout. This keeps a connection open
+setInterval(function() {
+    connection.query('SELECT 1');
+}, 5000);
+
 // export the connection
 module.exports = connection;
