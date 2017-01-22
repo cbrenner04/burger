@@ -1,13 +1,16 @@
 // require mysql
 var mysql = require("mysql");
+// configuration for local instances
+var dbConfig = {
+    host: "localhost",
+    user: "root",
+    password: process.env.PASSWORD || "",
+    database: "burgers_db"
+};
 
 // setup the connection
-var connection = mysql.createConnection({
-    host: process.env.HOST || "localhost",
-    user: process.env.USERNAME || "root",
-    password: process.env.PASSWORD || "",
-    database: process.env.DB || "burgers_db"
-});
+// DATABASE_URL env is set up for heroku
+var connection = mysql.createConnection(process.env.DATABASE_URL || dbConfig);
 
 // export the connection
 module.exports = connection;
