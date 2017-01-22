@@ -3,5 +3,3 @@ VALUES ('Cheeseburger'),
        ('Turkey Burger'),
        ('Black & Blue Burger'),
        ('Bacon, Cheddar Burger');
-
-SELECT * FROM burgers;

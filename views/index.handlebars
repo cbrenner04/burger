@@ -3,7 +3,7 @@
         <ul class="list-group">
             {{#each uneatenBurgers}}
                 <li class="list-group-item">
-                    {{ id }}. {{ burger_name }} | {{ created_at }}
+                    {{ id }}. {{ burger_name }}
                     <button type="submit" form="hidden-form" class="btn btn-primary btn-sm pull-right devour">Devour</button>
                 </li>
                 <form action="/{{id}}?_method=PUT" method="POST" id="hidden-form" class="hidden-xs-up"></form>
@@ -14,7 +14,7 @@
     <div class="col-xs-6">
         <ul class="list-group">
             {{#each eatenBurgers}}
-                <li class="list-group-item">{{ id }}. {{ burger_name }} | {{ created_at }}</li>
+                <li class="list-group-item">{{ id }}. {{ burger_name }}</li>
             {{/each}}
         </ul>
     </div>
