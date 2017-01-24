@@ -6,27 +6,19 @@ var burgers = require('../models/burger.js');
 module.exports = function(app) {
     // get the root route
     app.get('/', function(request, response) {
-        burgers.allBurgers()
-            .then(function(data) {
-                response.render('index', {
-                    uneatenBurgers: data.uneaten,
-                    eatenBurgers: data.eaten
-                });
-            })
-            .catch(function(error) {
-                throw error;
+        burgers.allBurgers(function(data) {
+            response.render('index', {
+                uneatenBurgers: data.uneaten,
+                eatenBurgers: data.eaten
             });
+        });
     });
 
     // define the get api/burgers route - for all burger data
     app.get('/api/burgers', function(request, response) {
-        burgers.allBurgers()
-            .then(function(data) {
-                response.json(data);
-            })
-            .catch(function(error) {
-                throw error;
-            });
+        burgers.allBurgers(function(data) {
+            response.json(data);
+        });
     });
 
     // define post for creating a burger
@@ -38,34 +30,22 @@ module.exports = function(app) {
             return;
         }
         // create that burger
-        burgers.create(request.body.burger)
-            .then(function() {
-                response.redirect('/');
-            })
-            .catch(function(error) {
-                throw error;
-            });
+        burgers.create(newBurger, function() {
+            response.redirect('/');
+        });
     });
 
     // define the get api/burgers/:id route - for single burger data
     app.get('/api/burgers/:id', function(request, response) {
-        burgers.singleBurger(request.params.id)
-            .then(function(data) {
-                response.json(data);
-            })
-            .catch(function(error) {
-                throw error;
-            });
+        burgers.singleBurger(request.params.id, function(data) {
+            response.json(data);
+        });
     });
 
     // define put for updating a burger
     app.put('/:id', function(request, response) {
-        burgers.update(request.params.id)
-            .then(function() {
-                response.redirect('/');
-            })
-            .catch(function(error) {
-                throw error;
-            });
+        burgers.update(request.params.id, function() {
+            response.redirect('/');
+        });
     });
 };
